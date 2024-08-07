@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import AuthForm from './components/Auth/AuthForm';
+import HomePage from './pages/HomePage';
+import MakeGroupPage from './pages/MakeGroupPage';
+import EditGroups from './pages/EditGroupPage';
+import { Route,Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import './App.css';
 
+
 function App() {
+
+  const isAuthenticated=useSelector(state=>state.auth.isAuthenticated)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      <Route exact path="/auth">
+      <AuthForm/>
+    </Route>
+
+    <Route exact path="/">
+    {isAuthenticated && <HomePage/>}
+      {!isAuthenticated && <Redirect to='/auth'/>}
+    </Route>
+
+    <Route exact path="/makeGroup">
+      <MakeGroupPage/>
+    </Route>
+
+    <Route exact path="/editGroup">
+      <EditGroups/>
+    </Route>
     </div>
   );
 }
