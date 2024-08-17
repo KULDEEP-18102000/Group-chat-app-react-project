@@ -1,6 +1,9 @@
 import axios from "axios"
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 const RestUserComponent=(props)=>{
+
+  const history=useHistory()
 
     const users=props.users
     console.log(users)
@@ -30,8 +33,20 @@ const RestUserComponent=(props)=>{
         users: arr
   }
 
+  console.log(new_obj)
+
   const response = await axios.post('http://localhost:3000/group/addgroup', new_obj)
   console.log(response)
+  history.push('/')
+  }
+
+  const onChangeHandler=(event)=>{
+    // console.log(event.target.name)
+    // console.log(event.target.value)
+    // console.log(event.target.checked)
+    my_obj[event.target.name]=event.target.checked
+    // setGroupDetails(console.log(event))
+    // console.log(my_obj)
   }
 
     return(
@@ -39,7 +54,7 @@ const RestUserComponent=(props)=>{
         {users.map((user)=>(
             <div>
             <label htmlFor={user.id}>{user[1]}</label>
-            <input type="checkbox" id={user[0]} name={user[1]}/>
+            <input type="checkbox" id={user[0]} name={user[0]} onChange={onChangeHandler}/>
             </div>
           ))}
           <button onClick={addGroupHandler}>Add Them In Group</button>

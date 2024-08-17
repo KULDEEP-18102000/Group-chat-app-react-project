@@ -1,8 +1,11 @@
 import axios from "axios"
 
 import { useState } from "react"
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 const PresentUserComponent=(props)=>{
+
+  const history=useHistory()
 
     const users=props.users
 
@@ -33,6 +36,7 @@ const PresentUserComponent=(props)=>{
 
   const response = await axios.post('http://localhost:3000/group/removegroup', new_obj)
   console.log(response)
+  history.push('/')
   }
 
   const makeAdminOfGroupHandler=async()=>{
@@ -52,6 +56,16 @@ const PresentUserComponent=(props)=>{
 
   const response = await axios.post('http://localhost:3000/group/admingroup', new_obj)
   console.log(response)
+  history.push('/')
+  }
+
+  const onChangeHandler=(event)=>{
+    // console.log(event.target.name)
+    // console.log(event.target.value)
+    // console.log(event.target.checked)
+    my_obj[event.target.name]=event.target.checked
+    // setGroupDetails(console.log(event))
+    // console.log(my_obj)
   }
 
     return(
@@ -59,7 +73,7 @@ const PresentUserComponent=(props)=>{
         {users.map((user)=>(
             <div>
             <label htmlFor={user.id}>{user[1]}</label>
-            <input type="checkbox" id={user[0]} name={user[1]}/>
+            <input type="checkbox" id={user[0]} name={user[0]} onChange={onChangeHandler}/>
             </div>
           ))}
           <button onClick={removeFromGroupHandler}>Remove Them From Group</button>

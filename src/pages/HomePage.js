@@ -148,7 +148,7 @@ const HomePage=()=>{
             <button onClick={routeToGroupSettingPage}>Group Settings</button>
             <LoggedInUsersComponent loggedInUsers={loggedInUsers}/>
             {/* <AllGroupComponent/> */}
-            <div className="sidebar">
+            <div>
             {groups.map((group)=>(
             <div>
                 <button onClick={()=>{fetchGroupChatAndFiles(group.groupId)}}>{group.name}</button>
