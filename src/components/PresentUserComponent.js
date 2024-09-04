@@ -36,6 +36,7 @@ const PresentUserComponent=(props)=>{
 
   const response = await axios.post('http://localhost:3000/group/removegroup', new_obj)
   console.log(response)
+  props.handleCloseGroup()
   history.push('/')
   }
 
@@ -56,6 +57,7 @@ const PresentUserComponent=(props)=>{
 
   const response = await axios.post('http://localhost:3000/group/admingroup', new_obj)
   console.log(response)
+  props.handleCloseGroup()
   history.push('/')
   }
 

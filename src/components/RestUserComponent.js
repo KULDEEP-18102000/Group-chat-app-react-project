@@ -37,6 +37,7 @@ const RestUserComponent=(props)=>{
 
   const response = await axios.post('http://localhost:3000/group/addgroup', new_obj)
   console.log(response)
+  props.handleCloseGroup()
   history.push('/')
   }
 

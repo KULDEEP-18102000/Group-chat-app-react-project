@@ -9,10 +9,13 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import AllGroupComponent from "../components/AllGroupComponent"
 import MessageFormComponent from "../components/MessageFormComponent"
 import ChatsComponent from "../components/ChatsComponent"
+import SideBarGroups from "../components/SideBarGroups"
 // import { useState } from "react"
 import { chatActions } from "../store/Chat"
 import { io } from 'socket.io-client';
+import Stack from '@mui/material/Stack';
 import '../App.css';
+import Box from '@mui/material/Box';
 
 const socket = io('http://localhost:5000'); 
 
@@ -143,12 +146,16 @@ const HomePage=()=>{
     return(
         <div>
             <NavBarComponent/>
+            {/* <Stack direction="row"> */}
+            {/* <SideBarGroups/> */}
+            <Box component="section" sx={{ width: '100%' }}>
             <h1>View All Groups</h1>
             <button onClick={routeToMakeGroupPage}>Make Group</button>
             <button onClick={routeToGroupSettingPage}>Group Settings</button>
             <LoggedInUsersComponent loggedInUsers={loggedInUsers}/>
             {/* <AllGroupComponent/> */}
             <div>
+                
             {groups.map((group)=>(
             <div>
                 <button onClick={()=>{fetchGroupChatAndFiles(group.groupId)}}>{group.name}</button>
@@ -158,6 +165,9 @@ const HomePage=()=>{
         {groupId!=null && <MessageFormComponent/>}
             
             {groupId!=null && chats.length>0 && <ChatsComponent chats={chats}/>}
+    </Box>
+            {/* </Stack> */}
+            
         </div>
     )
 }

@@ -1,5 +1,6 @@
 import AuthForm from './components/Auth/AuthForm';
 import HomePage from './pages/HomePage';
+import DashboardPage from './pages/DashboardPage';
 import MakeGroupPage from './pages/MakeGroupPage';
 import EditGroups from './pages/EditGroupPage';
 import { Route,Redirect } from 'react-router-dom';
@@ -12,13 +13,18 @@ function App() {
   const isAuthenticated=useSelector(state=>state.auth.isAuthenticated)
 
   return (
-    <div className='container'>
+    <div>
       <Route exact path="/auth">
       <AuthForm/>
     </Route>
 
-    <Route exact path="/">
+    {/* <Route exact path="/">
     {isAuthenticated && <HomePage/>}
+      {!isAuthenticated && <Redirect to='/auth'/>}
+    </Route> */}
+
+    <Route exact path="/">
+    {isAuthenticated && <DashboardPage/>}
       {!isAuthenticated && <Redirect to='/auth'/>}
     </Route>
 
